@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import desenlaces, estadisticas
+from routes import desenlaces, estadisticas, etl
 from config.settings import settings
 
 app = FastAPI(
@@ -20,6 +20,7 @@ app.add_middleware(
 # Routes
 app.include_router(desenlaces.router, prefix=settings.API_V1_STR)
 app.include_router(estadisticas.router, prefix=settings.API_V1_STR)
+app.include_router(etl.router, prefix=settings.API_V1_STR)
 
 @app.get("/")
 async def root():
