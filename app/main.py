@@ -96,3 +96,42 @@ def initialize_etl():
         "message": "Dashboard inicializado con datos de ejemplo",
         "ready_for_demo": True
     }
+
+@app.get("/api/v1/estadisticas/demografia")
+def get_demografia():
+    return [
+        {"sexo": "Masculino", "rango_edad": "18-30", "total_casos": 8},
+        {"sexo": "Masculino", "rango_edad": "31-50", "total_casos": 12},
+        {"sexo": "Masculino", "rango_edad": "51-70", "total_casos": 6},
+        {"sexo": "Femenino", "rango_edad": "18-30", "total_casos": 5},
+        {"sexo": "Femenino", "rango_edad": "31-50", "total_casos": 9},
+        {"sexo": "Femenino", "rango_edad": "51-70", "total_casos": 5}
+    ]
+
+@app.get("/api/v1/estadisticas/condiciones-egreso")
+def get_condiciones_egreso():
+    return [
+        {"condicion": "Mejorado", "total": 25, "porcentaje": 55.6},
+        {"condicion": "Alta médica", "total": 12, "porcentaje": 26.7},
+        {"condicion": "Traslado", "total": 5, "porcentaje": 11.1},
+        {"condicion": "Fallecido", "total": 3, "porcentaje": 6.7}
+    ]
+
+@app.get("/api/v1/estadisticas/diagnosticos")
+def get_diagnosticos():
+    return [
+        {"diagnostico": "Quemadura térmica grado II", "total_casos": 15},
+        {"diagnostico": "Quemadura eléctrica", "total_casos": 8},
+        {"diagnostico": "Quemadura química", "total_casos": 6},
+        {"diagnostico": "Quemadura por llama", "total_casos": 5},
+        {"diagnostico": "Quemadura por contacto", "total_casos": 4}
+    ]
+
+@app.get("/api/v1/estadisticas/estancia")
+def get_estancia():
+    return [
+        {"rango": "1-7 días", "total_casos": 12, "porcentaje": 26.7},
+        {"rango": "8-15 días", "total_casos": 18, "porcentaje": 40.0},
+        {"rango": "16-30 días", "total_casos": 10, "porcentaje": 22.2},
+        {"rango": "Más de 30 días", "total_casos": 5, "porcentaje": 11.1}
+    ]
