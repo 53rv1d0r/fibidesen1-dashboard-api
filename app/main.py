@@ -1,35 +1,29 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import desenlaces, estadisticas, etl
-from config.settings import settings
 
-app = FastAPI(
-    title=settings.PROJECT_NAME,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json"
-)
+app = FastAPI(title="Dashboard Médico API")
 
 # Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Routes
-app.include_router(desenlaces.router, prefix=settings.API_V1_STR)
-app.include_router(estadisticas.router, prefix=settings.API_V1_STR)
-app.include_router(etl.router, prefix=settings.API_V1_STR)
-
 @app.get("/")
-async def root():
+def root():
     return {
         "message": "Dashboard Médico API - fibidesen1",
         "version": "1.0.0",
-        "docs": "/docs"
+        "status": "running"
     }
 
 @app.get("/health")
-async def health_check():
+def health_check():
     return {"status": "healthy", "service": "dashboard_api"}
+
+@app.get("/api/v1/test")
+def test_endpoint():
+    return {"message": "API funcionando correctamente", "timestamp": "2025-01-30"}
