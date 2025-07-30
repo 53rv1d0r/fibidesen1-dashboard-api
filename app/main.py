@@ -86,7 +86,15 @@ def run_etl():
     return {
         "status": "success",
         "message": "ETL ejecutado exitosamente con datos de ejemplo",
-        "timestamp": "2025-01-30T10:00:00"
+        "timestamp": "2025-01-30T10:00:00",
+        "execution_time_seconds": 2.5,
+        "data_source": "sample_data",
+        "statistics": {
+            "desenlaces_count": 45,
+            "aseguradoras_count": 8,
+            "meses_count": 12,
+            "grupos_demograficos_count": 6
+        }
     }
 
 @app.post("/api/v1/etl/initialize")
@@ -94,7 +102,20 @@ def initialize_etl():
     return {
         "status": "success",
         "message": "Dashboard inicializado con datos de ejemplo",
-        "ready_for_demo": True
+        "ready_for_demo": True,
+        "execution_time_seconds": 3.2,
+        "timestamp": "2025-01-30T10:00:00",
+        "statistics": {
+            "desenlaces_count": 45,
+            "aseguradoras_count": 8,
+            "meses_count": 12,
+            "grupos_demograficos_count": 6
+        },
+        "next_steps": [
+            "Dashboard API listo para servir datos",
+            "Frontend puede conectarse y mostrar visualizaciones",
+            "Datos incluyen: desenlaces, estadísticas, demografía"
+        ]
     }
 
 @app.get("/api/v1/estadisticas/demografia")
