@@ -172,6 +172,22 @@ def get_estancia_promedio():
         ]
     }
 
+@app.get("/api/v1/estadisticas/mortalidad")
+def get_mortalidad():
+    return {
+        "resumen": {
+            "total_casos": 45,
+            "total_fallecidos": 3,
+            "tasa_mortalidad": 6.7
+        },
+        "distribución": [
+            {"condicion_egreso_nombre": "Mejorado", "total_casos": 25, "porcentaje": 55.6},
+            {"condicion_egreso_nombre": "Alta médica", "total_casos": 12, "porcentaje": 26.7},
+            {"condicion_egreso_nombre": "Traslado", "total_casos": 5, "porcentaje": 11.1},
+            {"condicion_egreso_nombre": "Fallecido", "total_casos": 3, "porcentaje": 6.7}
+        ]
+    }
+
 @app.get("/api/v1/etl/status")
 def get_etl_status():
     return {
