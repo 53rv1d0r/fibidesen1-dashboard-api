@@ -5,4 +5,30 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
+    envVars:
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: fibidesen1-dashboard-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: fibidesen1-dashboard-db
+          property: port
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: fibidesen1-dashboard-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: fibidesen1-dashboard-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: fibidesen1-dashboard-db
+          property: password
+
+databases:
+  - name: fibidesen1-dashboard-db
+    databaseName: fibidesen1
+    user: dashboard_user
 
