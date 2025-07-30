@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 
 app = FastAPI(title="Dashboard Médico API")
 
@@ -156,3 +157,27 @@ def get_estancia():
         {"rango": "16-30 días", "total_casos": 10, "porcentaje": 22.2},
         {"rango": "Más de 30 días", "total_casos": 5, "porcentaje": 11.1}
     ]
+
+@app.get("/api/v1/etl/status")
+def get_etl_status():
+    return {
+        "status": "completed",
+        "last_run": "2025-01-30T10:00:00",
+        "last_error": None,
+        "is_running": False
+    }
+
+@app.get("/api/v1/desenlaces/export/csv")
+def export_desenlaces_csv():
+    csv_content = """fecha_ingreso,nombre_paciente,edad,sexo,diagnostico,aseguradora,dias_estancia,estado
+2025-01-15,María García,45,Femenino,Quemadura térmica grado II,SURA EPS,12,Mejorado
+2025-01-20,Juan Rodríguez,32,Masculino,Quemadura eléctrica,Nueva EPS,8,Alta médica
+2025-01-18,Ana Martínez,28,Femenino,Quemadura química,Sanitas EPS,15,Mejorado"""
+    
+    return PlainTextResponse(
+        content=csv_content,
+        headers={
+            "Content-Disposition": "attachment; filename=desenlaces_fibidesen1.csv",
+            "Content-Type": "text/csv"
+        }
+    )
